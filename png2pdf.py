@@ -4,7 +4,7 @@ import os
 
 parser = argparse.ArgumentParser()
 
-group = parser.add_mutually_exclusive_group()
+# group = parser.add_mutually_exclusive_group()
 # group.add_argument('--no-name', action='store_true', help='Remove pdf name')
 # group.add_argument('--overwrite', action='store_true', help='Overwrite exists file')
 
