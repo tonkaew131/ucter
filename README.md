@@ -32,3 +32,15 @@ Create folder `poppler` inside project, then paste all poppler binary in it. Whe
 ```
 pyinstaller filename.py -F --add-data "./poppler/*;./poppler" --noupx
 ```
+
+## Contributing
+
+Feel free to fix my error.
+
+## Authors
+
+* **Athicha Leksansern** - *Initial work* - [Tonkaew](https://github.com/tonkaew131)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
