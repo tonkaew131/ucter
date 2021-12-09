@@ -10,6 +10,8 @@ Universal converter for me xD
 
 ## Usage
 
+- pdf2png: Convert pdf file to png image
+
 ```
 usage: pdf2png.py [-h] [--no-name | --overwrite] input_pdf output_path
 
@@ -21,4 +23,12 @@ optional arguments:
   -h, --help   show this help message and exit
   --no-name    Remove pdf name
   --overwrite  Overwrite exists file
+```
+
+## Executable
+
+Create folder `poppler` inside project, then paste all poppler binary in it. When converting, use 
+
+```
+pyinstaller filename.py -F --add-data "./poppler/*;./poppler" --noupx
 ```
