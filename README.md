@@ -1,6 +1,6 @@
 # UCTER
 
-Universal converter for me xD
+Universal converter cli for me xD
 
 ## Features
 
