@@ -6,7 +6,7 @@ Universal converter cli for me xD
 
 ```
 - pdf2png
-- *png2pdf
+- png2pdf
 
 *not working properly
 ```
@@ -28,17 +28,20 @@ optional arguments:
   --overwrite  Overwrite exists file
 ```
 
-- *png2pdf: Convert folder of images to pdf file
+- png2pdf: Convert folder of images to pdf file
 
 ```
-usage: png2pdf.py [-h] input_folder output_path
+usage: png2pdf.py [-h] [--optimize] [--quality QUALITY]
+                  input_folder output_path
 
 positional arguments:
-  input_folder  Path to image folder
-  output_path   Output path
+  input_folder       Path to image folder
+  output_path        Output path
 
 optional arguments:
-  -h, --help    show this help message and exit
+  -h, --help         show this help message and exit
+  --optimize         Optimize image quality
+  --quality QUALITY  Image quality, on a scale from 1 (worst) to 95 (best).
 ```
 
 ## Executable
