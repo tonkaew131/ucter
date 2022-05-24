@@ -37,12 +37,12 @@ if os.path.isdir(args.input_folder):
                 width, height = image.size
 
                 newSize = (round(width*OPTIMIZE_DPI/dpiX), round(height*OPTIMIZE_DPI/dpiY))
-                image = image.resize(newSize, resample=Image.LANCZOS)
+                image = image.resize(newSize, resample=Image.Resampling.LANCZOS)
             imagesList.append(image)
 
 optimize = False
-resolution = imagesList[0].info['dpi']
+resolutionX, resolutionY = imagesList[0].info['dpi']
 if args.optimize:
     optimize = True
-    resolution = OPTIMIZE_DPI
-imagesList[0].save('{}.pdf'.format(os.path.join(args.output_path, os.path.dirname(args.input_folder))), save_all=True, append_images=imagesList[1:], optimize=optimize, resolution=resolution, quality=args.quality)
+    resolutionX = OPTIMIZE_DPI
+imagesList[0].save('{}.pdf'.format(os.path.join(args.output_path, os.path.dirname(args.input_folder))), save_all=True, append_images=imagesList[1:], optimize=optimize, resolution=resolutionX, quality=args.quality)
