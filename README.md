@@ -1,14 +1,13 @@
 # UCTER
 
-Universal converter cli for me xD
+Universal converter cli for me xD Why? i hate cloud
 
 ## Features
 
 ```
 - pdf2png
 - png2pdf
-
-*not working properly
+- webp2png
 ```
 
 ## Usage
@@ -42,6 +41,19 @@ optional arguments:
   -h, --help         show this help message and exit
   --optimize         Optimize image quality
   --quality QUALITY  Image quality, on a scale from 1 (worst) to 95 (best).
+```
+
+- webp2png: Convert wepb image(s) file/folder to png file
+
+```
+usage: webp2png.py [-h] input_dir output_path
+
+positional arguments:
+  input_dir    Path to image file/folder
+  output_path  Output path
+
+options:
+  -h, --help   show this help message and exit
 ```
 
 ## Executable
