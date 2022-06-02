@@ -1,6 +1,6 @@
 # UCTER
 
-Universal converter cli for me xD Why? i hate cloud
+Universal converter cli for me Why? i hate cloud
 
 ## Features
 
@@ -12,56 +12,34 @@ Universal converter cli for me xD Why? i hate cloud
 
 ## Usage
 
-- pdf2png: Convert pdf file to png image
+- **pdf2png**: Convert pdf file to png image
 
 ```
 usage: pdf2png.py [-h] [--no-name | --overwrite] input_pdf output_path
-
-positional arguments:
-  input_pdf    Path to pdf file
-  output_path  Output path
-
-optional arguments:
-  -h, --help   show this help message and exit
-  --no-name    Remove pdf name
-  --overwrite  Overwrite exists file
 ```
 
-- png2pdf: Convert folder of images to pdf file
+- **png2pdf**: Convert folder of images to pdf file
 
 ```
 usage: png2pdf.py [-h] [--optimize] [--quality QUALITY]
                   input_folder output_path
 
-positional arguments:
-  input_folder       Path to image folder
-  output_path        Output path
-
-optional arguments:
-  -h, --help         show this help message and exit
-  --optimize         Optimize image quality
+options:
   --quality QUALITY  Image quality, on a scale from 1 (worst) to 95 (best).
 ```
 
-- webp2png: Convert wepb image(s) file/folder to png file
+- **webp2png**: Convert wepb image(s) file/folder to png file
 
 ```
 usage: webp2png.py [-h] input_dir output_path
-
-positional arguments:
-  input_dir    Path to image file/folder
-  output_path  Output path
-
-options:
-  -h, --help   show this help message and exit
 ```
 
 ## Executable
 
-Create folder `poppler` inside project, then paste all poppler binary in it. When converting, use 
+Compile all features into `.exe` for Windows
 
 ```
-pyinstaller filename.py -F --add-data "./poppler/*;./poppler" --noupx
+./make.sh
 ```
 
 ## Contributing

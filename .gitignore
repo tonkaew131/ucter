@@ -1,6 +1,9 @@
 __pycache__
+
 build
 dist
-poppler
-
 *.spec
+
+*.pdf
+*.png
+*.webp

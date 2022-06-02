@@ -1,21 +1,16 @@
-from pdf2image import convert_from_path
+import fitz  # PyMuPDF
 import argparse
 import shutil
-import sys
 import os
 
-# https://stackoverflow.com/a/56431948
-def current_path(dir_path):
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, dir_path)
-    return os.path.join(".", dir_path)
-
+DEFAULT_DPI = 300
 
 parser = argparse.ArgumentParser()
 
 group = parser.add_mutually_exclusive_group()
 group.add_argument('--no-name', action='store_true', help='Remove pdf name')
-group.add_argument('--overwrite', action='store_true', help='Overwrite exists file')
+group.add_argument('--overwrite', action='store_true',
+                   help='Overwrite exists file')
 
 parser.add_argument('input_pdf', type=str, help='Path to pdf file')
 parser.add_argument('output_path', type=str, help='Output path')
@@ -24,42 +19,49 @@ args = parser.parse_args()
 if args.output_path[-1] != '/':
     args.output_path += '/'
 
-os.environ['PATH'] += os.pathsep + os.pathsep.join([current_path('poppler')])
+base = os.path.basename(args.input_pdf)
+print(f'Opening {base} pdf file...')
 
-images = convert_from_path(args.input_pdf)
+document = fitz.open(args.input_pdf)
+pageCount = document.page_count
+
 fileName = ''
 if not args.no_name:
-    base=os.path.basename(args.input_pdf)
     fileName = os.path.splitext(base)[0]
 
 if not os.path.isdir(args.output_path):
     os.makedirs(args.output_path)
 
 isError = False
-for i in range(len(images)):
+for i in range(pageCount):
     name = ''
     if args.no_name:
-        name = str(i+1) +'.png'
+        name = str(i+1) + '.png'
     else:
         name = '{}-{}.png'.format(fileName, str(i+1))
 
     if (os.path.isfile(name)) and (not args.overwrite):
-        print('Failed to convert {}, already exists'.format(name))
+        print(f'\nFailed to convert {name}, already exists')
         isError = True
         break
-    images[i].save(name, 'PNG')
+
+    page = document.load_page(0)
+    image = page.get_pixmap(matrix=fitz.Matrix(DEFAULT_DPI/72, DEFAULT_DPI/72))
+    image.save(name, 'PNG')
+    print(f'{name} converted')
 
     if (os.getcwd() != os.path.realpath(args.output_path)) and (os.path.isfile(os.path.join(args.output_path, name))) and (not args.overwrite):
-        print('Failed to move {}, already exists'.format(name))
+        print(f'\nFailed to move {name}, already exists')
         isError = True
         break
 
     if(args.overwrite):
-        shutil.move(os.path.join(os.getcwd(), name), os.path.join(args.output_path, name))
+        shutil.move(os.path.join(os.getcwd(), name),
+                    os.path.join(args.output_path, name))
         continue
 
     if os.getcwd() != os.path.realpath(args.output_path):
         shutil.move(name, args.output_path)
 
 if not isError:
-    print('Converted {} files'.format(len(images)))
+    print(f'\n{pageCount} Files converted')
