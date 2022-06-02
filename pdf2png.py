@@ -48,7 +48,7 @@ for i in range(pageCount):
     page = document.load_page(0)
     image = page.get_pixmap(matrix=fitz.Matrix(DEFAULT_DPI/72, DEFAULT_DPI/72))
     image.save(name, 'PNG')
-    print(f'{name} converted')
+    print(f'- {name} converted')
 
     if (os.getcwd() != os.path.realpath(args.output_path)) and (os.path.isfile(os.path.join(args.output_path, name))) and (not args.overwrite):
         print(f'\nFailed to move {name}, already exists')
